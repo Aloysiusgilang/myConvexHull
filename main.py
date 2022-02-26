@@ -1,4 +1,4 @@
-from traceback import print_tb
+import convexHull as mch
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -21,9 +21,12 @@ plt.xlabel(data.feature_names[0])           # axis point
 plt.ylabel(data.feature_names[1])           # ordinate
 for i in range(len(data.target_names)):     # akan ada 3 convex hull karena target[0..2]
     bucket = df[df['Target'] == i]          # pembagian data berdasarkan target
-    bucket = bucket.iloc[:,[0,1]].values    # return 2d array [[a,b]] from attribute Petal width and Petal length 
-    hull = ConvexHull(bucket) #bagian ini diganti dengan hasil implementasi ConvexHull Divide & Conquer
+    bucket = bucket.iloc[:,[2,3]].values    # return 2d array [[a,b]] from attribute Petal width and Petal length 
+    hull = mch.myConvexHull(bucket) #bagian ini diganti dengan hasil implementasi ConvexHull Divide & Conquer
     plt.scatter(bucket[:, 0], bucket[:, 1], label=data.target_names[i]) 
-    for simplex in hull.simplices:
-        plt.plot(bucket[simplex, 0], bucket[simplex, 1], colors[i]) 
+    print(hull)
+    x = [x[0] for x in hull]
+    y = [x[1] for x in hull]
+    for simplex in hull:          # visualizing convex hull
+        plt.plot(x, y, colors[i]) 
 plt.legend()
