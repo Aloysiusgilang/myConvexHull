@@ -1,0 +1,4 @@
+Dataset yang digunakan unutuk menguji program ini adalah :
+1. Iris Dataset
+2. Wine Dataset
+3. Breas Cancer Dataset
